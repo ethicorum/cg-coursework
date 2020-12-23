@@ -134,7 +134,7 @@ class ProfTree extends Component<IProfTreeProps, IProfTreeState>{
         const faux = ReactFauxDOM.createElement('div');
 
         let width: number = window.innerWidth;
-        let height: number = 660;
+        let height: number = 600;
         let radius = width / 4;
         let svg = d3.select(faux)
             .append('svg')
@@ -143,7 +143,7 @@ class ProfTree extends Component<IProfTreeProps, IProfTreeState>{
             .attr('x', 0)
             .attr('y', 0)
             .append("g")
-            .attr("transform", `translate(${width / 2}, ${height / 2}) scale(1.25)`);
+            .attr("transform", `translate(${width / 2}, ${height / 2}) scale(0.75)`);
 
         let cluster = d3.cluster().size([360, (radius * 2) / 3]);
         var root = d3.hierarchy(data, function (d) {
@@ -221,24 +221,22 @@ class ProfTree extends Component<IProfTreeProps, IProfTreeState>{
             .attr("x", function (d: d3.HierarchyPointNode<IData>) { return d.x < Math.PI === !d.children ? 6 : -6; })
             .attr("text-anchor", function (d: d3.HierarchyPointNode<IData>) { return d.x < Math.PI === !d.children ? "start" : "end"; })
             .attr("transform", function (d: d3.HierarchyPointNode<IData>) {
-                let theta = (-d.x / Math.PI) * 180 + 90;
-                if (d.x > Math.PI) {
-                    theta += 180;
+                if (this.parentNode !== null) {
+                    let match = d3.select(this.parentNode as unknown as string).attr('transform').replace('rotate(', '').match(new RegExp(/-?\d+/));
+                    if (match !== null) {
+                        if (d.parent === null) {
+                            return `rotate(${-Number(match[0])})`;
+                        }
+                        let half = Math.ceil(d.x / 180);
+                        let direction = Math.pow(-1, half + 1);
+                        return `rotate(${-Number(match[0])}) translate(${direction * d.data.data.id.length * 1.25})`;
+                    }
+                    return '';
                 }
-                if (d.depth !== 3 && Math.abs(theta) < 30) {
-                    theta = 0;
-                }
-                if (d.data.data.id === 'Я') {
-                    return 'rotate(0)';
-                }
-                if (d.depth > 1) {
-                    return "rotate(" + theta + ")";
-                } else {
-                    return "";
-                }
+                return '';
             })
             .text(function (d) { return d.data.data.id; });
-
+            
         return faux;
     }
 
