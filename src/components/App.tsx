@@ -8,7 +8,7 @@ import '../styles/app.css';
 import logo from '../images/traektorium_logo.png';
 import { Dthree } from './Dthree';
 import { history } from './history';
-import { Personal } from './Personal';
+import { Trajectory } from './Trajectory';
 
 export const App: FunctionComponent = () =>
     <Router history={history}>
@@ -22,8 +22,8 @@ export const App: FunctionComponent = () =>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/d3">
-                            D3JS
+                        <Nav.Link as={Link} to="/nav">
+                            Навигатор
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
@@ -31,7 +31,7 @@ export const App: FunctionComponent = () =>
         </Navbar>
         <Switch>
             <Route exact path="/" component={Home}></Route>
-            <Route path="/d3" component={Dthree}></Route>
-            <Route path="/me/:code" component={Personal}></Route>
+            <Route path="/nav" component={Dthree}></Route>
+            <Route path="/trajectory/:code" component={Trajectory}></Route>
         </Switch>
     </Router>;

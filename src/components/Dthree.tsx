@@ -9,8 +9,7 @@ export class Dthree extends Component {
     render(): JSX.Element {
         return (
             <div>
-                <h1>D3JS</h1>
-                <a href={"https://d3js.org/"}>https://d3js.org/</a>
+                <h1>Навигатор</h1>
                 <div style={{ background: '#5f5ff5' }}>
                     <ProfTree />
                 </div>

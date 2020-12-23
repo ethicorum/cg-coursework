@@ -180,7 +180,7 @@ class ProfTree extends Component<IProfTreeProps, IProfTreeState>{
                 });
             })
             .on('click', (d, i) => {
-                history.push('/me/' + i.target.data.data.id);
+                history.push('/trajectory/' + i.target.data.data.id);
             });
 
         // Add a circle for each node.

@@ -30,7 +30,7 @@ interface Course {
     id: number;
 }
 
-export class Personal extends Component<MyProps, MyState> {
+export class Trajectory extends Component<MyProps, MyState> {
     constructor(props: MyProps) {
         super(props);
 
@@ -58,7 +58,9 @@ export class Personal extends Component<MyProps, MyState> {
     }
 
     render() {
-        const random = (min: number, max: number) => Math.random() * (max - min) + min;
+        const hoursData = this.state.skills.map(x => Number(x.courses.map(x => x.hours).reduce((sum, val) => sum + val).toFixed(0)));
+        const max = Math.max(...hoursData);
+        const percentage = hoursData.map(x => Math.ceil((x / max) * 100));
         return (
             <Container fluid>
                 <Row>
@@ -71,7 +73,7 @@ export class Personal extends Component<MyProps, MyState> {
                                 return (
                                     <Card body
                                         onClick={() => { this.setState({ skillId: i.id }) }}
-                                        style={{ cursor: 'pointer' }}>
+                                        style={{ cursor: 'pointer', width: `${percentage[i.id]}%`, background: 'rgb(0, 0, 0, 0.15)' }}>
                                         {i.title}
                                     </Card>
                                 );
@@ -80,6 +82,10 @@ export class Personal extends Component<MyProps, MyState> {
                     </Col>
                     <Col>
                         <Card body>
+                            <h2>{this.state.skills[this.state.skillId].title}</h2>
+                            <div>
+                                Часы: {hoursData[this.state.skillId]}
+                            </div>
                             {this.state.skills[this.state.skillId].courses.map(i => {
                                 return (
                                     <Card body
