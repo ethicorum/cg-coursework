@@ -1,12 +1,11 @@
 /// <reference path='../images.d.ts'/>
 
 import React, { FunctionComponent } from 'react';
-import { EmptyProps } from '../types';
 import { Row } from 'react-bootstrap';
 import '../styles/home.css';
 import logo from '../images/anim_logo.gif';
 
-export const Home: FunctionComponent<EmptyProps> = () =>
+export const Home: FunctionComponent = () =>
     <Row>
         <div id={"logoDiv"} className={"text-center"}>
             <h2>
