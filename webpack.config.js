@@ -33,6 +33,10 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: ['file-loader']
+            },
+            {
+                test: /\.(woff|woff2|ttf|eot)$/,
+                use: 'file-loader?name=fonts/[name].[ext]!static'
             }
         ]
     },

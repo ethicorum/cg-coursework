@@ -214,6 +214,8 @@ class ProfTree extends Component<IProfTreeProps, IProfTreeState>{
             });
 
         node.append("text")
+            .attr("font-family", "Lab Grotesque Regular")
+            .attr("font-size", '20pt')
             .attr("dx", '0px')
             .attr("dy", "0.31em")
             .attr('text-anchor', 'middle')
@@ -224,19 +226,20 @@ class ProfTree extends Component<IProfTreeProps, IProfTreeState>{
                 if (this.parentNode !== null) {
                     let match = d3.select(this.parentNode as unknown as string).attr('transform').replace('rotate(', '').match(new RegExp(/-?\d+/));
                     if (match !== null) {
+                        let angle = -Number(match[0]);
                         if (d.parent === null) {
-                            return `rotate(${-Number(match[0])})`;
+                            return `rotate(${angle}) translate(-22,-25)`;
                         }
                         let half = Math.ceil(d.x / 180);
                         let direction = Math.pow(-1, half + 1);
-                        return `rotate(${-Number(match[0])}) translate(${direction * d.data.data.id.length * 1.25})`;
+                        return `rotate(${angle}) translate(${direction * d.data.data.id.length}, ${direction * d.data.data.id.length / 2.0})`;
                     }
                     return '';
                 }
                 return '';
             })
             .text(function (d) { return d.data.data.id; });
-            
+
         return faux;
     }
 

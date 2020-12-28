@@ -90,7 +90,7 @@ export class Trajectory extends Component<MyProps, MyState> {
                                 return (
                                     <Card body
                                         onClick={() => { this.setState({ courseId: i.id }) }}
-                                        style={{ cursor: 'pointer', background: `rgb(255, 255, 0, ${i.rating / 5.0})` }}>
+                                        style={{ cursor: 'pointer', background: `rgb(246, 249, 139, ${i.rating / 5.0})` }}>
                                         {i.title}
                                     </Card>
                                 );
@@ -99,7 +99,7 @@ export class Trajectory extends Component<MyProps, MyState> {
                     </Col>
                     <Col>
                         <Card body
-                            style={{ background: `rgb(255, 255, 0, ${this.state.skills[this.state.skillId].courses[this.state.courseId].rating / 5.0})` }}>
+                            style={{ background: `rgb(246, 249, 139, ${this.state.skills[this.state.skillId].courses[this.state.courseId].rating / 5.0})` }}>
                             <h2>{this.state.skills[this.state.skillId].courses[this.state.courseId].title}</h2>
                             <div>
                                 Рейтинг {this.state.skills[this.state.skillId].courses[this.state.courseId].rating.toFixed(2)}
